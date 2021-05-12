@@ -19,7 +19,6 @@ app.use(cors());
 // Assign API routes
 app.use('/api', AuthRouter);
 
-
 // Connect with DB and launch
 const startApp = async () => {
     try {
