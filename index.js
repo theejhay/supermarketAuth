@@ -5,8 +5,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 // Bring in the app constants
-const { DB, PORT, SECRET } = require('./config');
-const { ExtractJwt } = require("passport-jwt");
+const { DB, PORT } = require('./config');
 
 // Import routes
 const authRoute = require("./routes/auth");
@@ -18,11 +17,6 @@ const broadcastMessageRoute = require("./routes/broadcastMessage");
 
 // Initialize the application
 const app = express();
-
-/*const options = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: SECRET
-};*/
 
 // Middlewares
 app.use(cors());
