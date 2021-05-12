@@ -1,6 +1,5 @@
 // Import User
 const User = require("../models/users");
-const bcrypt = require("bcryptjs");
 
 /**
  * @DESC To register a user
@@ -17,14 +16,9 @@ const register = async (req, res) => {
             })
         }
 
-        // Get hashed password
-        const hashedPassword = await bcrypt.hash(request.password, 12);
-
         // create a new user
         const newUser = new User({
-            ...request,
-            role: 'client',
-            password: hashedPassword
+            ...request
         });
         await newUser.save();
         return res.status(201).json({
