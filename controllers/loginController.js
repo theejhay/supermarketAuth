@@ -38,7 +38,7 @@ const login = async (req, res) => {
 
     // sign in the token and issue it to the user
     let token = jwt.sign({
-        user_id: user._id,
+        userID: user._id,
         role: user.role,
         email: user.email
     }, SECRET, { expiresIn: "3 days" });
