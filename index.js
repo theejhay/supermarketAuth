@@ -10,7 +10,11 @@ const { ExtractJwt } = require("passport-jwt");
 
 // Import routes
 const authRoute = require("./routes/auth");
-const userRoute = require("./routes/user");
+const productCategoryRoute = require("./routes/productCategory");
+const productRoute = require("./routes/product");
+const employeeRoute = require("./routes/employee");
+const clientRoute = require("./routes/client");
+const broadcastMessageRoute = require("./routes/broadcastMessage");
 
 // Initialize the application
 const app = express();
@@ -27,9 +31,17 @@ app.use(passport.initialize());
 
 require("./middlewares/passport")(passport);
 
-// Assign API routes
+const userAuth = passport.authenticate("jwt", { session: false });
+
+// unauthenticated routes
 app.use('/api', authRoute);
-app.use('/api', userRoute);
+
+// authenticated routes
+app.use('/api/product/categories', userAuth, productCategoryRoute);
+app.use('/api/products', userAuth, productRoute);
+app.use('/api/employee', userAuth, employeeRoute);
+app.use('/api/client', userAuth, clientRoute);
+app.use('/api/broadcast-message', userAuth, broadcastMessageRoute);
 
 // Connect with DB and launch
 const startApp = async () => {

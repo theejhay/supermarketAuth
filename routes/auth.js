@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const passport = require("passport");
 
 // Import validations
 const {
@@ -16,7 +15,6 @@ router.post("/login", userLoginValidator, loginController);
 
 // register route
 router.post("/register", userRegisterValidator, registerController);
-
 
 
 module.exports = router;
