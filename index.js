@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const passport = require("passport");
 
+// import seeder
+const seeder = require("./models/seeder");
+
 // Bring in the app constants
 const { DB, PORT } = require('./config');
 
@@ -41,7 +44,9 @@ app.use('/api/broadcast-message', userAuth, broadcastMessageRoute);
 const startApp = async () => {
     try {
         await mongoose.connect(DB, {useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false });
-        app.listen(PORT, () => {
+        app.listen(PORT, async () => {
+            // seed database
+            await seeder();
             console.log("SupermarketAuth is running on port : " + PORT);
         });
     } catch (err) {
